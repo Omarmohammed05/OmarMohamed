@@ -1,9 +1,10 @@
 import { Mascot } from '@/components/design/Mascot';
 import { Tape } from '@/components/design/Tape';
 import { TornEdge } from '@/components/design/TornEdge';
-import { CONTACT_EMAIL } from '@/lib/sample-data';
+import { getSiteContent } from '@/lib/db';
 
-export function CTA() {
+export async function CTA() {
+  const { contactEmail } = await getSiteContent();
   return (
     <section
       id="contact"
@@ -50,7 +51,7 @@ export function CTA() {
           </div>
           <div className="flex flex-col gap-3 md:col-span-5 md:flex-row">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
+              href={`mailto:${contactEmail}`}
               className="flex-1 border-2 border-black bg-brand-blue px-6 py-3 text-center font-display text-xl uppercase text-white shadow-brutal transition-colors hover:bg-white hover:text-brand-black"
             >
               START EMAIL →

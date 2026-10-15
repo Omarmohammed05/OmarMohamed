@@ -1,8 +1,11 @@
 /**
- * Design-reference sample content for Phase 1.
- * Phase 3 replaces these with live data from the Google Sheet
- * (settings / about / stack / services tabs) via lib/db.
+ * Seed content for the Neon Postgres database (loaded by scripts/seed.ts
+ * into the site_content table). The site reads live data via lib/db,
+ * never from this file directly.
  */
+import type { ApproachStep, SocialLink, StackItem } from './db/schemas';
+
+export type { ApproachStep, SocialLink, StackItem };
 
 export const SKILLS = [
   'FULL-STACK WEB DEV',
@@ -12,8 +15,6 @@ export const SKILLS = [
   'PERFORMANCE AUDITING',
   'DATABASE ARCHITECTURE',
 ] as const;
-
-export type StackItem = { abbr: string; name: string };
 
 export const STACK_ITEMS: StackItem[] = [
   { abbr: 'N', name: 'NEXT.JS' },
@@ -26,8 +27,6 @@ export const STACK_ITEMS: StackItem[] = [
   { abbr: '▲', name: 'VERCEL' },
   { abbr: 'Rd', name: 'REDIS' },
 ];
-
-export type ApproachStep = { title: string; body: string };
 
 export const APPROACH_STEPS: ApproachStep[] = [
   {
@@ -55,8 +54,6 @@ export const SERVICES_TICKER = [
   'API & CLOUD INFRASTRUCTURE',
   'HIGH-CONVERSION UI',
 ] as const;
-
-export type SocialLink = { label: string; abbr: string; href: string };
 
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'GitHub', abbr: 'GH', href: 'https://github.com' },

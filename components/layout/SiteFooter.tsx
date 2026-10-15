@@ -1,7 +1,8 @@
 import { TornEdge } from '@/components/design/TornEdge';
-import { CONTACT_EMAIL, SERVICES_TICKER, SOCIAL_LINKS } from '@/lib/sample-data';
+import { getSiteContent } from '@/lib/db';
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const { contactEmail, servicesTicker, socialLinks } = await getSiteContent();
   return (
     <TornEdge
       side="top"
@@ -11,7 +12,7 @@ export function SiteFooter() {
         {/* Services ticker */}
         <div className="overflow-hidden border-y-2 border-black py-2.5">
           <div className="flex flex-wrap justify-center gap-x-6 font-display text-lg uppercase tracking-wider text-black sm:justify-between sm:whitespace-nowrap md:text-2xl">
-            {SERVICES_TICKER.map((service) => (
+            {servicesTicker.map((service) => (
               <span key={service} className="flex items-center gap-6">
                 {service}
                 <span className="text-brand-red" aria-hidden="true">•</span>
@@ -24,16 +25,16 @@ export function SiteFooter() {
         <div className="flex flex-col items-center justify-between gap-6 pt-2 text-xs font-bold md:flex-row">
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`mailto:${CONTACT_EMAIL}`}
+              href={`mailto:${contactEmail}`}
               className="border border-black bg-black px-4 py-2 uppercase text-white shadow-brutal transition-colors hover:bg-brand-red"
             >
               CONTACT ME
             </a>
-            <span className="text-neutral-700">WWW.OMAR.DEV // {CONTACT_EMAIL.toUpperCase()}</span>
+            <span className="text-neutral-700">WWW.OMAR.DEV // {contactEmail.toUpperCase()}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            {SOCIAL_LINKS.map((link) => (
+            {socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}

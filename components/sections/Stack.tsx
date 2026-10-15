@@ -1,7 +1,8 @@
 import { Tape } from '@/components/design/Tape';
-import { APPROACH_STEPS, SKILLS, STACK_ITEMS } from '@/lib/sample-data';
+import { getSiteContent } from '@/lib/db';
 
-export function Stack() {
+export async function Stack() {
+  const { skills, stackItems, approachSteps } = await getSiteContent();
   return (
     <section id="stack" className="relative z-30 bg-brand-paper px-6 pb-24">
       <div className="mx-auto max-w-7xl">
@@ -26,7 +27,7 @@ export function Stack() {
                 SKILLS
               </h3>
               <ul className="flex flex-col gap-3 text-xs font-bold uppercase tracking-wider text-white/95 md:text-sm">
-                {SKILLS.map((skill) => (
+                {skills.map((skill) => (
                   <li key={skill} className="flex items-center gap-2">
                     <span className="inline-block h-2 w-2 bg-black" aria-hidden="true" />
                     {skill}
@@ -44,7 +45,7 @@ export function Stack() {
                 Modern, production-proven tools battle-tested under load:
               </p>
               <div className="grid grid-cols-3 gap-3 pt-2">
-                {STACK_ITEMS.map((item) => (
+                {stackItems.map((item) => (
                   <div
                     key={item.name}
                     className="flex flex-col items-center justify-center gap-1 rounded-xl border border-white/20 bg-black p-3 text-white shadow-brutal transition-colors hover:bg-white hover:text-black"
@@ -62,7 +63,7 @@ export function Stack() {
                 APPROACH TO BUILD
               </h3>
               <div className="space-y-4">
-                {APPROACH_STEPS.map((step) => (
+                {approachSteps.map((step) => (
                   <div key={step.title} className="border-l-4 border-black bg-black/30 p-3.5">
                     <span className="mb-1 block text-xs font-bold uppercase text-white">
                       {step.title}
