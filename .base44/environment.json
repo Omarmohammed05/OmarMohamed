@@ -1,0 +1,35 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "GOOGLE_SERVICE_ACCOUNT_EMAIL",
+      "description": "Google service account email (Cloud Console → IAM → Service Accounts) with the Sheets API enabled; share the spreadsheet with it as Editor."
+    },
+    {
+      "name": "GOOGLE_PRIVATE_KEY",
+      "description": "Private key of that service account (the full -----BEGIN/END PRIVATE KEY----- block from the JSON key file)."
+    },
+    {
+      "name": "GOOGLE_SHEET_ID",
+      "description": "ID of the Google Sheet used as the database (the long string in the sheet URL between /d/ and /edit)."
+    },
+    {
+      "name": "IMGBB_API_KEY",
+      "description": "imgbb API key for image uploads — get one free at https://api.imgbb.com/"
+    },
+    {
+      "name": "ADMIN_EMAIL",
+      "description": "Email used to log in to the /admin panel."
+    },
+    {
+      "name": "ADMIN_PASSWORD_HASH",
+      "description": "bcrypt hash of the admin password — generate with: npx bcryptjs-cli hash \"your-password\" 10"
+    },
+    {
+      "name": "SESSION_SECRET",
+      "description": "Long random string used to sign admin session JWTs — generate with: openssl rand -base64 48"
+    }
+  ]
+}
