@@ -7,6 +7,10 @@ import { Work } from '@/components/sections/Work';
 import { Systems } from '@/components/sections/Systems';
 import { CTA } from '@/components/sections/CTA';
 
+// ISR: the homepage re-renders from the Neon database at most every 60s
+// (admin writes invalidate instantly via revalidateTag).
+export const revalidate = 60;
+
 export default function HomePage() {
   return (
     <>

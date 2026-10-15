@@ -63,3 +63,70 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const CONTACT_EMAIL = 'hello@omar.dev';
+
+export type SeedProject = {
+  slug: string;
+  title: string;
+  tag: string;
+  tagline: string;
+  description: string;
+  role: string;
+  year: number;
+  tech: string[];
+  liveUrl: string;
+  repoUrl: string | null;
+  featured: boolean;
+  sortOrder: number;
+  published: boolean;
+};
+
+export const SAMPLE_PROJECTS: SeedProject[] = [
+  {
+    slug: 'krooked-streetwear',
+    title: 'Krooked Streetwear',
+    tag: 'E-COMMERCE',
+    tagline: 'Headless streetwear storefront built for sub-second drops.',
+    description:
+      'Custom headless Shopify storefront with sub-second page loads, algorithmic size advisor, and Stripe 1-click checkout.',
+    role: 'DESIGN + FULL-STACK BUILD',
+    year: 2025,
+    tech: ['NEXT.JS', 'GRAPHQL', 'SHOPIFY', 'STRIPE'],
+    liveUrl: 'https://krooked-apparel.com',
+    repoUrl: null,
+    featured: true,
+    sortOrder: 1,
+    published: true,
+  },
+  {
+    slug: 'monolith-architecture',
+    title: 'Monolith Architecture',
+    tag: 'PORTFOLIO',
+    tagline: 'Interactive 3D model inspector for an architecture studio.',
+    description:
+      'Interactive 3D model inspector with smooth inertial camera controls, dynamic daylight simulation, and zero bundle bloat.',
+    role: 'DESIGN + FRONT-END BUILD',
+    year: 2026,
+    tech: ['THREE.JS', 'TAILWIND'],
+    liveUrl: 'https://monolith-arch.ch',
+    repoUrl: null,
+    featured: true,
+    sortOrder: 2,
+    published: true,
+  },
+  {
+    slug: 'kissa-vinyl-lounge',
+    title: 'Kissa Vinyl Lounge',
+    tag: 'HOSPITALITY / AUDIO',
+    tagline: 'Low-latency audio streaming with live table reservations.',
+    description:
+      'Low-latency WebAudio live-stream player with real-time seat reservation scheduler and SMS table confirmations.',
+    role: 'FULL-STACK BUILD',
+    year: 2026,
+    tech: ['NEXT.JS', 'WEBAUDIO'],
+    liveUrl: 'https://kissa-hi-fi.club',
+    repoUrl: null,
+    featured: false,
+    sortOrder: 3,
+    published: true,
+  },
+];

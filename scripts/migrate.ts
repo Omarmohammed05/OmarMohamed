@@ -17,6 +17,7 @@ const MIGRATION_SQL = `
     id              uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     slug            text NOT NULL UNIQUE,
     title           text NOT NULL,
+    tag             text NOT NULL DEFAULT '',
     tagline         text NOT NULL DEFAULT '',
     description     text NOT NULL DEFAULT '',
     role            text NOT NULL DEFAULT '',
@@ -43,6 +44,9 @@ const MIGRATION_SQL = `
   );
 
   CREATE INDEX IF NOT EXISTS projects_published_idx ON projects (published, sort_order);
+
+  -- Idempotent column adds for databases created before this revision.
+  ALTER TABLE projects ADD COLUMN IF NOT EXISTS tag text NOT NULL DEFAULT '';
 `;
 
 async function main(): Promise<void> {

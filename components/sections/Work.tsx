@@ -1,9 +1,20 @@
+import Link from 'next/link';
 import { Mascot } from '@/components/design/Mascot';
 import { SectionHeader } from '@/components/design/SectionHeader';
 import { TwoToneHeading } from '@/components/design/TwoToneHeading';
 import { ProjectCard } from './ProjectCard';
+import { ProjectCanvas, projectHost } from './ProjectCanvas';
+import { listProjects } from '@/lib/db';
 
-export function Work() {
+const CARD_STYLES = [
+  { className: '-rotate-2 bg-brand-paper', tapeClassName: '-top-4 right-6 h-6 w-20 rotate-6' },
+  { className: 'rotate-1 bg-white', tapeClassName: '-top-4 left-6 h-6 w-20 -rotate-12' },
+  { className: '-rotate-1 bg-brand-paperDark', tapeClassName: '-top-4 right-10 h-6 w-20 rotate-3' },
+] as const;
+
+export async function Work() {
+  const projects = (await listProjects()).slice(0, 3);
+
   return (
     <section
       id="work"
@@ -13,7 +24,7 @@ export function Work() {
         <SectionHeader
           left="// 02. PRODUCTION SHOWCASE"
           middle="FLAGSHIP DIGITAL EXPERIENCES"
-          right="INDEX [01-03]"
+          right={`INDEX [01-${String(projects.length).padStart(2, '0')}]`}
         />
 
         <div className="mb-16 grid grid-cols-1 items-end gap-10 lg:grid-cols-12">
@@ -41,111 +52,42 @@ export function Work() {
           <Mascot className="pointer-events-none absolute right-0 top-0 h-96 w-96 opacity-10" />
 
           <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* Krooked — streetwear e-commerce */}
-            <ProjectCard
-              title="Krooked Streetwear"
-              tag="E-COMMERCE"
-              description="Custom headless Shopify storefront with sub-second page loads, algorithmic size advisor, and Stripe 1-click checkout."
-              tech="NEXT.JS / GRAPHQL"
-              url="krooked-apparel.com"
-              year="2025"
-              className="-rotate-2 bg-brand-paper"
-              tapeClassName="-top-4 right-6 h-6 w-20 rotate-6"
-              canvas={
-                <div className="relative flex min-h-[220px] flex-col justify-between border-x-0 border-b-0 border-neutral-900 bg-neutral-950 p-4 text-white">
-                  <div className="flex items-start justify-between">
-                    <span className="font-display text-2xl tracking-wider text-brand-blue">
-                      KROOKED.CO
-                    </span>
-                    <span className="bg-white px-2 py-0.5 text-[9px] font-bold uppercase text-black">
-                      SHOP NOW
-                    </span>
-                  </div>
-                  <div className="my-4 border border-white/20 bg-neutral-900/60 p-3">
-                    <p className="font-display text-xl leading-tight">
-                      LIMITED DROP 004 // TOKYO HEAVYWEIGHT FLEECE
-                    </p>
-                    <p className="mt-1 text-[10px] text-neutral-400">
-                      STOCK: 12 REMAINING // GLOBAL SHIPPING
-                    </p>
-                  </div>
-                  <div className="flex justify-between border-t border-neutral-800 pt-2 text-[10px] text-neutral-400">
-                    <span>SHOPIFY HEADLESS</span>
-                    <span className="text-emerald-400">+142% CONVERSION</span>
-                  </div>
-                </div>
-              }
-            />
-
-            {/* Monolith — architecture studio */}
-            <ProjectCard
-              title="Monolith Architecture"
-              tag="PORTFOLIO"
-              description="Interactive 3D model inspector with smooth inertial camera controls, dynamic daylight simulation, and zero bundle bloat."
-              tech="THREE.JS / TAILWIND"
-              url="monolith-arch.ch"
-              year="2026"
-              className="rotate-1 bg-white"
-              tapeClassName="-top-4 left-6 h-6 w-20 -rotate-12"
-              canvas={
-                <div className="relative flex min-h-[220px] flex-col justify-between bg-brand-blue p-4 text-white">
-                  <div className="flex items-start justify-between">
-                    <span className="font-display text-2xl tracking-wider">MONOLITH</span>
-                    <span className="bg-black px-2 py-0.5 text-[9px] font-bold uppercase">
-                      BERLIN // ZURICH
-                    </span>
-                  </div>
-                  <div className="my-3 border border-white bg-black p-3 text-white">
-                    <p className="font-display text-xl leading-none">CONCRETE PAVILION 4</p>
-                    <p className="mt-1 text-[10px] text-neutral-400">
-                      EXPERIMENTAL RESIDENTIAL SPACE
-                    </p>
-                  </div>
-                  <div className="flex justify-between border-t border-white/20 pt-2 text-[10px] text-white/80">
-                    <span>THREE.JS / WEBGL</span>
-                    <span className="font-bold">100 LIGHTHOUSE</span>
-                  </div>
-                </div>
-              }
-            />
-
-            {/* Kissa — vinyl lounge */}
-            <ProjectCard
-              title="Kissa Vinyl Lounge"
-              tag="HOSPITALITY / AUDIO"
-              description="Low-latency WebAudio live-stream player with real-time seat reservation scheduler and SMS table confirmations."
-              tech="NEXT.JS / WEBAUDIO"
-              url="kissa-hi-fi.club"
-              year="2026"
-              className="-rotate-1 bg-brand-paperDark"
-              tapeClassName="-top-4 right-10 h-6 w-20 rotate-3"
-              canvas={
-                <div className="relative flex min-h-[220px] flex-col justify-between bg-neutral-900 p-4 text-white">
-                  <div className="flex items-start justify-between">
-                    <span className="font-display text-2xl tracking-wider text-amber-400">
-                      KISSA AUDIO
-                    </span>
-                    <span className="bg-brand-red px-2 py-0.5 text-[9px] font-bold uppercase">
-                      LIVE SESSION
-                    </span>
-                  </div>
-                  <div className="my-3 border-2 border-amber-400/40 bg-neutral-950 p-3">
-                    <div className="flex items-center gap-2">
-                      <span className="h-2 w-2 animate-ping rounded-full bg-brand-red" aria-hidden="true" />
-                      <p className="text-xs text-amber-300">NOW STREAMING: VINYL VAULT #41</p>
-                    </div>
-                    <p className="mt-1 text-[10px] text-neutral-400">
-                      TABLE RESERVATION SYSTEM ONLINE
-                    </p>
-                  </div>
-                  <div className="flex justify-between border-t border-neutral-800 pt-2 text-[10px] text-neutral-400">
-                    <span>AUDIO API / REST</span>
-                    <span className="text-emerald-400">99.9% UPTIME</span>
-                  </div>
-                </div>
-              }
-            />
+            {projects.length === 0 ? (
+              <p className="col-span-full border-2 border-neutral-700 bg-neutral-900 p-8 text-center font-display text-2xl uppercase text-neutral-400 shadow-brutal">
+                NO PROJECTS PUBLISHED YET — THE ARCHIVE IS LOADING.
+              </p>
+            ) : (
+              projects.map((project, index) => {
+                const style = CARD_STYLES[index % CARD_STYLES.length];
+                return (
+                  <ProjectCard
+                    key={project.slug}
+                    title={project.title}
+                    tag={project.tag}
+                    description={project.description}
+                    tech={project.tech.join(' / ')}
+                    url={projectHost(project)}
+                    year={project.year ? String(project.year) : '—'}
+                    href={`/projects/${project.slug}`}
+                    className={style.className}
+                    tapeClassName={style.tapeClassName}
+                    canvas={<ProjectCanvas project={project} variant={index} />}
+                  />
+                );
+              })
+            )}
           </div>
+
+          {projects.length > 0 ? (
+            <div className="relative z-10 mt-12 flex justify-center">
+              <Link
+                href="/projects"
+                className="border-2 border-neutral-700 bg-neutral-900 px-6 py-3 font-display text-sm uppercase tracking-widest text-white shadow-brutal transition-colors hover:bg-brand-blue"
+              >
+                VIEW FULL ARCHIVE →
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

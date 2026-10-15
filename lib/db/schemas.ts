@@ -30,6 +30,7 @@ export const projectSchema = z.object({
   id: z.string().uuid(),
   slug: z.string().min(1),
   title: z.string().min(1),
+  tag: z.string(),
   tagline: z.string(),
   description: z.string(),
   role: z.string(),
@@ -42,8 +43,9 @@ export const projectSchema = z.object({
   featured: z.boolean(),
   sortOrder: z.number().int(),
   published: z.boolean(),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  /** ISO strings — cached payloads must stay JSON-serializable. */
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 export type Project = z.infer<typeof projectSchema>;
 

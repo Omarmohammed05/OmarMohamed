@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { MockupFrame } from '@/components/design/MockupFrame';
 import { Tape } from '@/components/design/Tape';
 import { cn } from '@/lib/utils';
@@ -10,6 +11,8 @@ type Props = {
   tech: string;
   url: string;
   year: string;
+  /** Detail-page route for the "VIEW CASE" link. */
+  href: string;
   className?: string;
   tapeClassName?: string;
   /** Unique mockup canvas rendered inside the browser frame. */
@@ -24,6 +27,7 @@ export function ProjectCard({
   tech,
   url,
   year,
+  href,
   className,
   tapeClassName,
   canvas,
@@ -45,9 +49,9 @@ export function ProjectCard({
         <p className="text-xs text-neutral-700">{description}</p>
         <div className="flex items-center justify-between border-t border-black/10 pt-2 text-xs font-bold">
           <span className="bg-black px-2 py-0.5 text-white">{tech}</span>
-          <a href="#contact" className="underline transition-colors hover:text-brand-red">
+          <Link href={href} className="underline transition-colors hover:text-brand-red">
             VIEW CASE →
-          </a>
+          </Link>
         </div>
       </div>
     </article>

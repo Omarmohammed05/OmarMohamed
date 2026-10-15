@@ -8,7 +8,7 @@ const publicHostSuffix = process.env.BASE44_PUBLIC_HOST_SUFFIX;
 const nextConfig = {
   reactStrictMode: true,
   ...(previewMode && publicHostSuffix
-    ? { allowedDevOrigins: [`https://3000-${publicHostSuffix}`] }
+    ? { allowedDevOrigins: [`3000-${publicHostSuffix}`] }
     : {}),
   images: {
     remotePatterns: [{ protocol: 'https', hostname: 'i.ibb.co' }],

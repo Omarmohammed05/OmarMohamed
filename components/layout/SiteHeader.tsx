@@ -34,7 +34,7 @@ export function SiteHeader() {
             AVAILABLE FOR HIRE
           </span>
           <a
-            href="#contact"
+            href="/contact"
             className="border border-black bg-brand-blue px-3 py-1.5 font-display text-sm uppercase tracking-wide text-white shadow-brutal transition duration-200 hover:bg-white hover:text-brand-black md:px-4"
           >
             LET&apos;S TALK

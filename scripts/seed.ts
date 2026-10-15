@@ -7,6 +7,7 @@ import { Pool } from 'pg';
 import {
   APPROACH_STEPS,
   CONTACT_EMAIL,
+  SAMPLE_PROJECTS,
   SERVICES_TICKER,
   SKILLS,
   SOCIAL_LINKS,
@@ -36,7 +37,41 @@ async function main(): Promise<void> {
         [key, JSON.stringify(data)],
       );
     }
-    console.log(`db:seed — wrote ${CONTENT.length} content keys.`);
+    for (const project of SAMPLE_PROJECTS) {
+      await pool.query(
+        `INSERT INTO projects (slug, title, tag, tagline, description, role, year, tech,
+                               cover_image_url, gallery, live_url, repo_url, featured,
+                               sort_order, published)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb, $9, $10::jsonb, $11, $12, $13, $14, $15)
+         ON CONFLICT (slug) DO UPDATE SET
+           title = EXCLUDED.title, tag = EXCLUDED.tag, tagline = EXCLUDED.tagline,
+           description = EXCLUDED.description, role = EXCLUDED.role, year = EXCLUDED.year,
+           tech = EXCLUDED.tech, cover_image_url = EXCLUDED.cover_image_url,
+           gallery = EXCLUDED.gallery, live_url = EXCLUDED.live_url, repo_url = EXCLUDED.repo_url,
+           featured = EXCLUDED.featured, sort_order = EXCLUDED.sort_order,
+           published = EXCLUDED.published, updated_at = now()`,
+        [
+          project.slug,
+          project.title,
+          project.tag,
+          project.tagline,
+          project.description,
+          project.role,
+          project.year,
+          JSON.stringify(project.tech),
+          null,
+          '[]',
+          project.liveUrl,
+          project.repoUrl,
+          project.featured,
+          project.sortOrder,
+          project.published,
+        ],
+      );
+    }
+    console.log(
+      `db:seed — wrote ${CONTENT.length} content keys + ${SAMPLE_PROJECTS.length} projects.`,
+    );
   } finally {
     await pool.end();
   }
